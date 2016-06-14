@@ -35,3 +35,12 @@ class SocMan:
 
 	def getDump(self):
 		return self.__lib
+
+	def search(self, value):
+		founded = []
+		if(type(value) == str):
+			for item in self.__lib:
+				if(value in item.getTitle()):
+					founded.append(item)
+		return founded
+
