@@ -6,7 +6,6 @@ class SearchUI(QWidget):
 		super(SearchUI, self).__init__()
 
 		# create objects;
-		self.__search = searchFunction
 
 		self.__ob_vlay_main = QVBoxLayout()
 		self.__ob_line_main = QLineEdit()
