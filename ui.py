@@ -3,6 +3,7 @@ from PyQt5.QtCore import Qt
 from menuUi import MenuUI
 from addUi import AddUI
 from listUi import ListUI
+from aboutUi import AboutUI
 
 class Ui(QWidget):
 	def __init__(self, socman):
@@ -15,6 +16,7 @@ class Ui(QWidget):
 		self.__ob_widget_menu = MenuUI()
 		self.__ob_widget_add = AddUI(socman)
 		self.__ob_widget_list = ListUI(socman)
+		self.__ob_widget_about = AboutUI()
 
 		# config;
 
@@ -27,6 +29,9 @@ class Ui(QWidget):
 		self.__ob_widget_add.buttonClicked = self.__onAddClicked
 
 		self.__ob_widget_list.buttonClicked = self.__onListClicked
+		self.__ob_widget_list.doubleClicked = self.__onDoubleClicked
+
+		self.__ob_widget_about.buttonClicked = self.__onAboutClicked
 
 		self.__ob_vlay_main.addWidget(self.__ob_widget_menu)
 		self.__ob_vlay_main.setAlignment(Qt.AlignCenter)
@@ -43,8 +48,6 @@ class Ui(QWidget):
 			self.__ob_vlay_main.removeWidget(self.__ob_widget_menu)
 			self.__ob_vlay_main.addWidget(self.__ob_widget_list)
 			self.__ob_widget_list.showData()
-		else:
-			print("SEARCH")
 
 	def __onAddClicked(self):
 		self.__ob_widget_add.hide()
@@ -57,3 +60,15 @@ class Ui(QWidget):
 		self.__ob_vlay_main.removeWidget(self.__ob_widget_list)
 		self.__ob_vlay_main.addWidget(self.__ob_widget_menu)
 		self.__ob_widget_menu.show()
+
+	def __onDoubleClicked(self, item):
+		self.__ob_widget_list.hide()
+		self.__ob_vlay_main.removeWidget(self.__ob_widget_list)
+		self.__ob_vlay_main.addWidget(self.__ob_widget_about)
+		self.__ob_widget_about.showData(item)
+
+	def __onAboutClicked(self):
+		self.__ob_widget_about.hide()
+		self.__ob_vlay_main.removeWidget(self.__ob_widget_about)
+		self.__ob_vlay_main.addWidget(self.__ob_widget_list)
+		self.__ob_widget_list.showData()

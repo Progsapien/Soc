@@ -19,6 +19,7 @@ class ListUI(QWidget):
 		self.__ob_button_main = Button("Назад")
 
 		self.buttonClicked = 0
+		self.doubleClicked = 0
 
 		#config;
 
@@ -36,6 +37,7 @@ class ListUI(QWidget):
 
 		self.__ob_list_main.setStyleSheet("background: rgb(200, 200, 200); border: none;")
 		self.__ob_list_main.setMinimumWidth(self.__ob_list_main.sizeHintForColumn(0))
+		self.__ob_list_main.itemDoubleClicked.connect(self.__onDoubleClicked)
 
 		self.__ob_button_main.clicked.connect(self.__onButtonClicked)
 		self.__ob_button_main.setFixedHeight(50)
@@ -61,5 +63,8 @@ class ListUI(QWidget):
 			for i in self.__socman.getDump():
 				self.__ob_list_main.addItem(i.getTitle())
 
-
-
+	def __onDoubleClicked(self, item):
+		for i in self.__socman.getDump():
+			if(item.text() == i.getTitle()):
+				self.doubleClicked(i)
+				break
