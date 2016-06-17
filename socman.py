@@ -20,9 +20,9 @@ class SocMan:
 		else:
 			return -1
 
-	def delete(self, row):
-		if(type(row) == int and row <= len(self.__lib)):
-			self.__lib.remove(self.__lib[row])
+	def delete(self, item):
+		if(type(item) == Soc):
+			self.__lib.remove(item)
 			self.save()
 			return 0
 		else:
