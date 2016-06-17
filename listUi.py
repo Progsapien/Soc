@@ -59,20 +59,20 @@ class ListUI(QWidget):
 		self.buttonClicked()
 
 	def __onLineEdit(self):
+		self.__ob_button_delete.hide()
 		if(len(self.__ob_line_search.text())):
 			self.__ob_list_main.clear()
 			for i in self.__socman.getDump():
-				if(self.__ob_line_search.text() in i.getTitle()):
+				if(self.__ob_line_search.text().upper() in i.getTitle().upper()):
 					item = QListWidgetItem()
 					item.setText(i.getTitle())
 					item.setSizeHint(QSize(10,30))
 					self.__ob_list_main.addItem(item)
 		else:
-			self.__ob_list_main.clear()
-			for i in self.__socman.getDump():
-				self.__ob_list_main.addItem(i.getTitle())
+			self.loadList()
 
 	def __onDoubleClicked(self, item):
+		self.__ob_list_main.clearSelection()
 		for i in self.__socman.getDump():
 			if(item.text() == i.getTitle()):
 				self.doubleClicked(i)
