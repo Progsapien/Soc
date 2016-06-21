@@ -54,7 +54,17 @@ class AddUI(QWidget):
 				self.buttonClicked()
 
 	def __onLinesEdit(self):
-		if(len(self.__ob_line_title.text()) and len(self.__ob_line_text.toPlainText())):
-			self.__ob_button_add.setCurrentText("Добавить")
+		if(len(self.__ob_line_title.text())):
+			count = 0
+			for i in self.__socman.getDump():
+				if(self.__ob_line_title.text().upper() != i.getTitle().upper()):
+					count += 1
+				if(count == len(self.__socman.getDump())):
+					if(len(self.__ob_line_text.toPlainText())):
+						self.__ob_button_add.setCurrentText("Добавить")
+					else:
+						self.__ob_button_add.setCurrentText("Назад")
+				else:
+					self.__ob_button_add.setCurrentText("Такая запись уже существует")
 		else:
 			self.__ob_button_add.setCurrentText("Назад")

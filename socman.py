@@ -15,6 +15,7 @@ class SocMan:
 		item = Soc()
 		if(not item.setText(text) and not item.setTitle(title)):
 			self.__lib.append(item)
+			self.sort()
 			self.save()
 			return 0
 		else:
@@ -23,6 +24,7 @@ class SocMan:
 	def delete(self, item):
 		if(type(item) == Soc):
 			self.__lib.remove(item)
+			self.sort()
 			self.save()
 			return 0
 		else:
@@ -43,4 +45,20 @@ class SocMan:
 				if(value in item.getTitle()):
 					founded.append(item)
 		return founded
+
+	def sort(self):
+		sorted = []
+		sorted_lib = []
+		for i in self.__lib:
+			sorted.append(i.getTitle().upper())
+		sorted.sort()
+		for i in sorted:
+			for item in self.__lib:
+				if(i == item.getTitle().upper()):
+					item.setTitle(item.getTitle().upper())
+					sorted_lib.append(item)
+					break
+		self.__lib = sorted_lib
+
+
 
